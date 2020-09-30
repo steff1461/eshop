@@ -1,4 +1,4 @@
-package com.trakknamur.demo.exceptions.models;
+package be.technobel.eshop.exception.model;
 
 import lombok.AccessLevel;
 import lombok.Data;

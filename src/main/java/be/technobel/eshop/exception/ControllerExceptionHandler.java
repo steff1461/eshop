@@ -1,17 +1,15 @@
-package com.trakknamur.demo.exceptions;
+package be.technobel.eshop.exception;
 
 /*
     Approche de gestion globale des exceptions
  */
 
-import com.trakknamur.demo.exceptions.models.ErrorDTO;
-import com.trakknamur.demo.exceptions.models.RuleGolfException;
+import be.technobel.eshop.exception.model.ErrorDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.cfg.NotYetImplementedException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -41,12 +39,7 @@ public class ControllerExceptionHandler {
                         .status(HttpStatus.NOT_FOUND)
                         .body(new ErrorDTO(e.getMessage()));
             }
-            if (e instanceof RuleGolfException) {
-                log.debug("Erreur gérée : " +  e.getClass() + " : " + e.getMessage());
-                return ResponseEntity
-                        .status(HttpStatus.CONFLICT)
-                        .body(new ErrorDTO(e.getMessage()));
-            }
+
             if (e instanceof NoSuchElementException) {
                 log.debug("Erreur gérée : " +  e.getClass() + " : " + e.getMessage());
                 return ResponseEntity
