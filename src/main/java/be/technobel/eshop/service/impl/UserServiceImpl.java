@@ -95,7 +95,6 @@ public class UserServiceImpl implements UserDetailsService, BaseService<UserDto,
     }
 
     @Override
-    @PreAuthorize("hasAnyAuthority('ADMIN','RESPONSABLE')")
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         return repository
                 .findByUsername(s)

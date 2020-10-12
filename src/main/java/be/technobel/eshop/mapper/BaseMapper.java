@@ -27,10 +27,10 @@ public interface BaseMapper {
 
     @Mappings({
 
-            @Mapping(target = "isAccountNonExpired", source = "accountNonExpired"),
-            @Mapping(target = "isAccountNonLocked", source = "accountNonLocked"),
-            @Mapping(target = "isCredentialsNonExpired", source = "credentialsNonExpired"),
-            @Mapping(target = "isEnabled", source = "enabled"),
+            @Mapping(target = "accountNonExpired", source = "accountNonExpired"),
+            @Mapping(target = "accountNonLocked", source = "accountNonLocked"),
+            @Mapping(target = "credentialsNonExpired", source = "credentialsNonExpired"),
+            @Mapping(target = "enabled", source = "enabled"),
             @Mapping(target = "roles", source = "roles")
     })
     UserDto toDto(User user);
@@ -38,24 +38,16 @@ public interface BaseMapper {
     @Mappings({
 
             @Mapping(target = "idUser", ignore = true),
-            @Mapping(target = "isAccountNonExpired", ignore = true),
-            @Mapping(target = "isAccountNonLocked", ignore = true),
-            @Mapping(target = "isCredentialsNonExpired", ignore = true),
-            @Mapping(target = "isEnabled", ignore = true),
+            @Mapping(target = "accountNonExpired", ignore = true),
+            @Mapping(target = "accountNonLocked", ignore = true),
+            @Mapping(target = "credentialsNonExpired", ignore = true),
+            @Mapping(target = "enabled", ignore = true),
             @Mapping(target = "creationDate", ignore = true),
             @Mapping(target = "updateDate", ignore = true),
+            @Mapping(target = "authorities", ignore = true)
     })
     User fromFormtoEntity(UserForm form);
 
-
-    @Mappings({
-            @Mapping(target = "isAccountNonExpired", source = "accountNonExpired"),
-            @Mapping(target = "isAccountNonLocked", source = "accountNonLocked"),
-            @Mapping(target = "isCredentialsNonExpired", source = "credentialsNonExpired"),
-            @Mapping(target = "isEnabled", source = "enabled"),
-
-    })
-    User fromDtoToEntity(UserDto dto);
 
     //Category
 

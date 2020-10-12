@@ -1,8 +1,6 @@
 package be.technobel.eshop.controller;
 
 import be.technobel.eshop.model.dto.OrderDto;
-import be.technobel.eshop.model.dto.OrderDto;
-import be.technobel.eshop.model.form.OrderForm;
 import be.technobel.eshop.model.form.OrderForm;
 import be.technobel.eshop.service.impl.OrderServiceImpl;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +22,11 @@ public class OrderController implements BaseController<OrderForm, OrderDto,Long>
     @Override
     public ResponseEntity<List<OrderDto>> findAll() {
         return ResponseEntity.ok(service.findAll());
+    }
+
+    @GetMapping(path = "/customer/{id}")
+    public ResponseEntity<List<OrderDto>> findAllByCustomerId(@PathVariable("id") Long id){
+        return ResponseEntity.ok(service.findOrdersByCustomer(id));
     }
 
     @GetMapping(path = "/{id}")
