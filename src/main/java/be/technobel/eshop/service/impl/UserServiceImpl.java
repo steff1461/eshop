@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-public class UserServiceImpl implements UserDetailsService, BaseService<UserDto, UserForm,Long> {
+public class UserServiceImpl implements UserDetailsService, BaseService<UserDto, UserForm, Long> {
 
     private final UserRepository repository;
     private final BaseMapper mapper;
@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserDetailsService, BaseService<UserDto,
         return repository
                 .findById(id)
                 .map(mapper::toDto)
-                .orElseThrow(()-> new IllegalArgumentException("User not found"));
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
     }
 
     @Override
@@ -71,8 +71,8 @@ public class UserServiceImpl implements UserDetailsService, BaseService<UserDto,
     public boolean delete(Long id) {
 
         User todelete = repository
-                        .findById(id)
-                        .orElseThrow(()-> new IllegalArgumentException("User not found"));
+                .findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
 
         repository.delete(todelete);
 
@@ -84,8 +84,8 @@ public class UserServiceImpl implements UserDetailsService, BaseService<UserDto,
     public UserDto update(UserForm form, Long id) {
 
         User toUpdate = repository
-                        .findById(id)
-                        .orElseThrow(()-> new IllegalArgumentException("User not found"));
+                .findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
 
         toUpdate.setPassword(encoder.getPasswordEncoder().encode(form.getPassword()))
                 .setUsername(form.getUsername())
@@ -95,9 +95,19 @@ public class UserServiceImpl implements UserDetailsService, BaseService<UserDto,
     }
 
     @Override
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+    public User loadUserByUsername(String s) throws UsernameNotFoundException {
         return repository
                 .findByUsername(s)
-                .orElseThrow(()->new UsernameNotFoundException("The user with the name :"+s+" doesn't exists"));
+                .orElseThrow(() -> new UsernameNotFoundException("The user with the name :" + s + " doesn't exists"));
+    }
+
+    public UserDto authenticateUser(UserForm userForm) {
+
+        User user = loadUserByUsername(userForm.getUsername());
+
+        if (encoder.getPasswordEncoder().matches(userForm.getPassword(), user.getPassword()))
+            return mapper.toDto(user);
+        else
+            throw new IllegalArgumentException("Wrong password");
     }
 }

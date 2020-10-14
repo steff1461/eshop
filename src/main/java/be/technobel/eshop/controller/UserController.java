@@ -5,7 +5,6 @@ import be.technobel.eshop.model.form.UserForm;
 import be.technobel.eshop.service.impl.UserServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController

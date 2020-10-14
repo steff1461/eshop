@@ -1,11 +1,9 @@
 package be.technobel.eshop.controller;
-
 import be.technobel.eshop.model.dto.CategoryDto;
 import be.technobel.eshop.model.form.CategoryForm;
 import be.technobel.eshop.service.impl.CategoryServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
