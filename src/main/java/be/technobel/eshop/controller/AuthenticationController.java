@@ -4,7 +4,6 @@ import be.technobel.eshop.model.dto.UserDto;
 import be.technobel.eshop.model.form.UserForm;
 import be.technobel.eshop.service.impl.UserServiceImpl;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

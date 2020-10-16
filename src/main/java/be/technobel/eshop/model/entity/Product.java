@@ -26,7 +26,7 @@ public class Product {
     @Column(name = "product_weight")
     private Float weight;
 
-    @Column(name="product_price")
+    @Column(name = "product_price")
     private Float price;
 
     @ManyToOne

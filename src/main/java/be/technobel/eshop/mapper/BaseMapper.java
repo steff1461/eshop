@@ -27,10 +27,10 @@ public interface BaseMapper {
 
     @Mappings({
 
-            @Mapping(target = "accountNonExpired", source = "accountNonExpired"),
-            @Mapping(target = "accountNonLocked", source = "accountNonLocked"),
-            @Mapping(target = "credentialsNonExpired", source = "credentialsNonExpired"),
-            @Mapping(target = "enabled", source = "enabled"),
+            @Mapping(target = "isAccountNonExpired", source = "accountNonExpired"),
+            @Mapping(target = "isAccountNonLocked", source = "accountNonLocked"),
+            @Mapping(target = "isCredentialsNonExpired", source = "credentialsNonExpired"),
+            @Mapping(target = "isEnabled", source = "enabled"),
             @Mapping(target = "roles", source = "roles")
     })
     UserDto toDto(User user);
@@ -38,13 +38,13 @@ public interface BaseMapper {
     @Mappings({
 
             @Mapping(target = "idUser", ignore = true),
-            @Mapping(target = "accountNonExpired", ignore = true),
-            @Mapping(target = "accountNonLocked", ignore = true),
-            @Mapping(target = "credentialsNonExpired", ignore = true),
-            @Mapping(target = "enabled", ignore = true),
+            @Mapping(target = "isAccountNonExpired", ignore = true),
+            @Mapping(target = "isAccountNonLocked", ignore = true),
+            @Mapping(target = "isCredentialsNonExpired", ignore = true),
+            @Mapping(target = "isEnabled", ignore = true),
             @Mapping(target = "creationDate", ignore = true),
             @Mapping(target = "updateDate", ignore = true),
-            @Mapping(target = "authorities", ignore = true)
+            //@Mapping(target = "authorities", ignore = true)
     })
     User fromFormtoEntity(UserForm form);
 
@@ -73,7 +73,8 @@ public interface BaseMapper {
 
         view.setName(product.getName())
                 .setPrice(product.getPrice())
-                .setWeight(product.getWeight());
+                .setWeight(product.getWeight())
+                .setIdProduct(product.getIdProduct());
 
         return view;
     }
@@ -91,7 +92,7 @@ public interface BaseMapper {
             @Mapping(target = "idProduct", ignore = true),
             @Mapping(target = "category", ignore = true),
             @Mapping(target = "creationDate", ignore = true),
-            @Mapping(target = "updateDate", ignore = true)
+            @Mapping(target = "updateDate", ignore = true),
     })
     Product fromFormToEntity(ProductForm form);
 
@@ -100,6 +101,7 @@ public interface BaseMapper {
 
         CategoryView view = new CategoryView();
         view.setName(category.getName());
+        view.setId(category.getIdCategory());
         return view;
     }
 
@@ -117,7 +119,7 @@ public interface BaseMapper {
 
             @Mapping(target="idOrder",ignore = true),
             @Mapping(target = "totPrice",ignore = true),
-            @Mapping(target = "products",ignore = true)
+            @Mapping(target = "products", ignore = true)
     })
 
     Order fromFormToEntity(OrderForm form);

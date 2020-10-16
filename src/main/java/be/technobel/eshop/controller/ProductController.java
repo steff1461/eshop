@@ -61,7 +61,7 @@ public class ProductController implements  BaseController<ProductForm, ProductDt
 
 
     @GetMapping(
-            value = "/get-file",
+            value = "/get-img",
             produces = MediaType.IMAGE_PNG_VALUE
     )
     public ResponseEntity<InputStreamResource> getImage() throws IOException {

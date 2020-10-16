@@ -8,12 +8,10 @@ import be.technobel.eshop.model.form.UserForm;
 import be.technobel.eshop.repository.UserRepository;
 import be.technobel.eshop.service.BaseService;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -80,18 +78,23 @@ public class UserServiceImpl implements UserDetailsService, BaseService<UserDto,
     }
 
     @Override
-    @PreAuthorize("hasAuthority('ADMIN')")
     public UserDto update(UserForm form, Long id) {
 
-        User toUpdate = repository
-                .findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        toUpdate.setPassword(encoder.getPasswordEncoder().encode(form.getPassword()))
-                .setUsername(form.getUsername())
-                .setRoles(form.getRoles());
+        if(user.getIdUser().equals(id)) {
 
-        return mapper.toDto(repository.save(toUpdate));
+            User toUpdate = repository
+                    .findById(id)
+                    .orElseThrow(() -> new IllegalArgumentException("User not found"));
+
+            toUpdate.setPassword(encoder.getPasswordEncoder().encode(form.getPassword()))
+                    .setUsername(form.getUsername())
+                    .setRoles(form.getRoles());
+
+            return mapper.toDto(repository.save(toUpdate));
+        }
+        return null;
     }
 
     @Override

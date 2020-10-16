@@ -97,7 +97,6 @@ public class OrderServiceImpl implements BaseService<OrderDto, OrderForm, Long> 
     }
 
     @Override
-    @PreAuthorize("hasAnyAuthority('ADMIN','RESPONSABLE')")
     public boolean save(OrderForm form) {
 
         Order order = mapper.fromFormToEntity(form);

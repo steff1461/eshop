@@ -13,6 +13,7 @@ public class ProductView {
     private String name;
     private Float weight;
     private Float price;
+    private Long idProduct;
 
 
     public String getName() {
@@ -39,6 +40,15 @@ public class ProductView {
 
     public ProductView setPrice(Float price) {
         this.price = price;
+        return this;
+    }
+
+    public Long getIdProduct() {
+        return idProduct;
+    }
+
+    public ProductView setIdProduct(Long idProduct) {
+        this.idProduct = idProduct;
         return this;
     }
 }

@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 @Builder
 public class ProductDto {
 
-
     private Long idProduct;
     private String name;
     private Float weight;

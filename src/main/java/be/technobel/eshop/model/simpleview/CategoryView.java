@@ -10,6 +10,16 @@ import lombok.NoArgsConstructor;
 public class CategoryView {
 
     private String name;
+    private Long id;
+
+    public Long getId() {
+        return id;
+    }
+
+    public CategoryView setId(Long id) {
+        this.id = id;
+        return this;
+    }
 
     public String getName() {
         return name;

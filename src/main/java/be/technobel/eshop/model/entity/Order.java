@@ -5,6 +5,8 @@ import be.technobel.eshop.model.enumeration.EPaymentMode;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 
 import javax.persistence.*;
@@ -33,7 +35,11 @@ public class Order  {
     @Column(name = "order_id_cust")
     private Long idCustomer;
 
-    @OneToMany(cascade = CascadeType.REFRESH)
+    @ManyToMany
+    @JoinTable(
+            name = "products_order",
+            joinColumns = {@JoinColumn(name = "order_id")},
+            inverseJoinColumns = {@JoinColumn(name = "products_id")})
     private List<Product> products = new ArrayList<>();
 
     @Column(name = "order_deliv_date")

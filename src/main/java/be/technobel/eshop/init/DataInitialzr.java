@@ -103,8 +103,18 @@ public class DataInitialzr implements InitializingBean {
 
         List<OrderForm> orders = Arrays.asList(
 
-                OrderForm.builder().deliveryDate(LocalDate.now()).idCustomer(2L).paymentMode(EPaymentMode.Bancontact).productsId(Arrays.asList(7L,12L,10L)).build(),
-                OrderForm.builder().deliveryDate(LocalDate.now()).idCustomer(1L).paymentMode(EPaymentMode.Mastercard).productsId(Arrays.asList(9L,11L,8L)).build()
+                OrderForm.builder()
+                        .deliveryDate(LocalDate.now())
+                        .idCustomer(2L)
+                        .paymentMode(EPaymentMode.Bancontact)
+                        .productsId(Arrays.asList(7L,12L,11L))
+                        .build(),
+
+                OrderForm.builder()
+                        .deliveryDate(LocalDate.now())
+                        .idCustomer(1L).paymentMode(EPaymentMode.Bancontact)
+                        .productsId(Arrays.asList(9L,8L,11L))
+                        .build()
         );
 
         orders.forEach(orderService::save);
